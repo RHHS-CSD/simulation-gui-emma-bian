@@ -31,7 +31,7 @@ public class Frame1 extends javax.swing.JFrame implements CardSwitcher{
         cardPanel.add(new Panel(this), "simulation");
         this.add(cardPanel);
         
-        switchToCard("simulation");
+        switchToCard("intro");
     }
 
     /**
