@@ -15,6 +15,7 @@ public class Panel extends javax.swing.JPanel {
     CardSwitcher switcher = null;
     
     boolean running = false;
+    boolean paused = false;
     
     /**
      * Creates new form Panel
@@ -40,6 +41,8 @@ public class Panel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         startStopButton = new javax.swing.JButton();
         stepButton = new javax.swing.JButton();
+        pauseButton = new javax.swing.JButton();
+        speedSlider = new javax.swing.JSlider();
         displayPanel1 = new simulation.DisplayPanel();
 
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
@@ -58,16 +61,33 @@ public class Panel extends javax.swing.JPanel {
             }
         });
 
+        pauseButton.setText("Pause");
+        pauseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pauseButtonActionPerformed(evt);
+            }
+        });
+
+        speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                speedSliderStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(16, 16, 16)
                 .addComponent(startStopButton)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(pauseButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stepButton)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +95,9 @@ public class Panel extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startStopButton)
-                    .addComponent(stepButton))
+                    .addComponent(stepButton)
+                    .addComponent(pauseButton)
+                    .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -108,6 +130,7 @@ public class Panel extends javax.swing.JPanel {
 
     private void startStopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopButtonActionPerformed
         if (!running) {
+            
             displayPanel1.start();
             startStopButton.setText("Stop");
             running = true;
@@ -121,12 +144,31 @@ public class Panel extends javax.swing.JPanel {
     private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
         displayPanel1.update();
     }//GEN-LAST:event_stepButtonActionPerformed
+
+    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
+        if (!paused) {
+            displayPanel1.t.stop();
+            pauseButton.setText("Resume");
+            paused = true;
+        } else if (paused) {
+            displayPanel1.t.start();
+            pauseButton.setText("Pause");
+            paused = false;
+        }
+        
+    }//GEN-LAST:event_pauseButtonActionPerformed
+
+    private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
+        displayPanel1.setSpeed(250 - 2*speedSlider.getValue());
+    }//GEN-LAST:event_speedSliderStateChanged
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private simulation.DisplayPanel displayPanel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton pauseButton;
+    private javax.swing.JSlider speedSlider;
     private javax.swing.JButton startStopButton;
     private javax.swing.JButton stepButton;
     // End of variables declaration//GEN-END:variables

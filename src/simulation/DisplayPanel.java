@@ -5,8 +5,11 @@
 package simulation;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,6 +17,8 @@ import java.awt.event.MouseListener;
  */
 public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
 
+    Timer t;
+    
     Simulation sim = new Simulation();
     boolean filled = false;
     int xClick, yClick;
@@ -25,6 +30,11 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     public DisplayPanel() {
         initComponents();
         addMouseListener(this);
+        
+        
+        t = new Timer(100, new TimerTick());
+        t.start();
+        
     }
 
     public void start() {
@@ -42,10 +52,14 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         filled = false;
         repaint();
     }
-    
+        
     public void update() {
         sim.updateGrid(sim.grid, sim.newGrid);
         repaint();
+    }
+    
+    public void setSpeed(int speed) {
+        t.setDelay(speed);
     }
     
     @Override
@@ -71,7 +85,6 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("paint");
         for (int i=1;i<sim.grid.length;i++) {
             g.drawLine(i*25, 0, i*25, getHeight());
         }
@@ -97,6 +110,13 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
             }
         }
         
+    }
+    
+    private class TimerTick implements ActionListener {
+
+        public void actionPerformed(ActionEvent ae) {
+            update();
+        }
     }
     
     /**

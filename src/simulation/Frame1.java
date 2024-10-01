@@ -22,8 +22,6 @@ public class Frame1 extends javax.swing.JFrame implements CardSwitcher{
     public Frame1() {
         initComponents();
         
-        cardPanel = new javax.swing.JPanel();
-        
         cl = new CardLayout();
         cardPanel.setLayout(cl);
 
@@ -31,6 +29,7 @@ public class Frame1 extends javax.swing.JFrame implements CardSwitcher{
         cardPanel.add(new IntroPanel(this), "intro");
         cardPanel.add(new InfoPanel(this), "info");
         cardPanel.add(new Panel(this), "simulation");
+        this.add(cardPanel);
         
         switchToCard("simulation");
     }
@@ -44,20 +43,9 @@ public class Frame1 extends javax.swing.JFrame implements CardSwitcher{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	cardPanel = new javax.swing.JPanel();
+        this.setSize(500, 550);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
-        );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
