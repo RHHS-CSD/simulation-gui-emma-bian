@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="GGA_Template" default="default" basedir=".">
-    <description>Builds, tests, and runs the project GGA Template.</description>
+<project name="Simulation_GUI" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Simulation GUI.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +58,7 @@
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="GGA_Template-impl.jar">
+        <target name="run" depends="Simulation_GUI-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
