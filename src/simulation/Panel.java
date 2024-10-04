@@ -170,6 +170,8 @@ public class Panel extends javax.swing.JPanel {
             displayPanel1.reset();
             startStopButton.setText("Start");
             running = false;
+            //sets predator and prey counter to zero
+            resetCount();
         }
     }//GEN-LAST:event_startStopButtonActionPerformed
 
@@ -197,6 +199,11 @@ public class Panel extends javax.swing.JPanel {
         //set the speed to 250 minus 2 times the slider value (0 to 100)
         displayPanel1.setSpeed(250 - 2*speedSlider.getValue());
     }//GEN-LAST:event_speedSliderStateChanged
+    
+    private void resetCount() {
+        preyCount.setText("0");
+        predatorCount.setText("0");
+    }
     
     private void updateCount() {
         

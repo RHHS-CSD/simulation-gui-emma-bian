@@ -4,7 +4,6 @@
  */
 package simulation;
 
-import automatastarter.GamePanel;
 import utils.CardSwitcher;
 
 /**
