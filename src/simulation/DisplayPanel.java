@@ -56,6 +56,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     public void reset() {
         //stop the timer
         t.stop();
+        
         filled = false;
         repaint();
     }

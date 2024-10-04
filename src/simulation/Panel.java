@@ -28,7 +28,6 @@ public class Panel extends javax.swing.JPanel {
         initComponents();
         
         switcher = p;
-        t.start();
     }
     
     /**
@@ -164,33 +163,47 @@ public class Panel extends javax.swing.JPanel {
             //if it was not running before, start the program and set the button to "stop"
             displayPanel1.start();
             startStopButton.setText("Stop");
+            
+            //start timer
+            t.start();
             running = true;
+            
         } else if (running) {
             //if it was running before, reset the program to its starting position
             displayPanel1.reset();
             startStopButton.setText("Start");
-            running = false;
-            //sets predator and prey counter to zero
+            
+            //stops timer and sets predator and prey counter to zero
+            t.stop();
             resetCount();
+            running = false;
         }
     }//GEN-LAST:event_startStopButtonActionPerformed
 
     private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
-        //update the grid by one step
-        displayPanel1.update();
+        //button can be used only when the program is running
+        if (running) {
+            //update the grid by one step
+            displayPanel1.update();
+        }
+        
     }//GEN-LAST:event_stepButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        if (!paused) {
-            //if the program was running, stop the timer so the frame freezes
-            displayPanel1.t.stop();
-            pauseButton.setText("Resume");
-            paused = true;
-        } else if (paused) {
-            //if the program was paused, resume
-            displayPanel1.t.start();
-            pauseButton.setText("Pause");
-            paused = false;
+        //button can be used only when the program is running
+        if (running) {
+            
+            if (!paused) {
+                //if the program was running, stop the timer so the frame freezes
+                displayPanel1.t.stop();
+                pauseButton.setText("Resume");
+                paused = true;
+            } else if (paused) {
+                //if the program was paused, resume
+                displayPanel1.t.start();
+                pauseButton.setText("Pause");
+                paused = false;
+            }
         }
         
     }//GEN-LAST:event_pauseButtonActionPerformed
@@ -201,6 +214,7 @@ public class Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_speedSliderStateChanged
     
     private void resetCount() {
+        //set predator and prey counter to zero
         preyCount.setText("0");
         predatorCount.setText("0");
     }
