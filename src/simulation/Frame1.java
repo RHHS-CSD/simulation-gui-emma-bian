@@ -44,7 +44,7 @@ public class Frame1 extends javax.swing.JFrame implements CardSwitcher{
     private void initComponents() {
 
        	cardPanel = new javax.swing.JPanel();
-        this.setSize(500, 600);
+        this.setSize(500, 610);
 
     }// </editor-fold>//GEN-END:initComponents
 
