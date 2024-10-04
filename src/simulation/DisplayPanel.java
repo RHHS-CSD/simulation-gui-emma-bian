@@ -41,15 +41,15 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         sim.resetGrid(sim.grid);
         sim.resetGrid(sim.newGrid);
         
-        
         sim.generateNew(sim.grid, sim.numPredator, sim.numPrey);
         filled = true;
         
+        t.start();
         repaint();
     }
     
     public void reset() {
-        filled = false;
+//        t.stop();
         repaint();
     }
         
@@ -93,7 +93,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
             g.drawLine(0, i*25, getWidth(), i*25);
         }
         
-        if (filled) {
+        if (true) {
             for (int i=0;i<sim.grid.length;i++) {
                 for (int j=0;j<sim.grid[0].length;j++) {
 
@@ -109,6 +109,8 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
                 }
             }
         }
+        
+        
         
     }
     

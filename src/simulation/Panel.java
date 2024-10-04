@@ -24,10 +24,7 @@ public class Panel extends javax.swing.JPanel {
         initComponents();
         
         switcher = p;
-    }
-    
-    
-    
+    }    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +40,10 @@ public class Panel extends javax.swing.JPanel {
         stepButton = new javax.swing.JButton();
         pauseButton = new javax.swing.JButton();
         speedSlider = new javax.swing.JSlider();
+        predatorLabel = new javax.swing.JLabel();
+        preyLabel = new javax.swing.JLabel();
+        predatorCount = new javax.swing.JLabel();
+        preyCount = new javax.swing.JLabel();
         displayPanel1 = new simulation.DisplayPanel();
 
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
@@ -74,20 +75,39 @@ public class Panel extends javax.swing.JPanel {
             }
         });
 
+        predatorLabel.setText("Predator Count:");
+
+        preyLabel.setText("Prey Count:");
+
+        predatorCount.setText("0");
+
+        preyCount.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(startStopButton)
-                .addGap(18, 18, 18)
-                .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(pauseButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stepButton)
-                .addGap(26, 26, 26))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(startStopButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(pauseButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stepButton)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(predatorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(predatorCount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(preyLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(preyCount)
+                        .addGap(102, 102, 102))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +118,13 @@ public class Panel extends javax.swing.JPanel {
                     .addComponent(stepButton)
                     .addComponent(pauseButton)
                     .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(predatorLabel)
+                    .addComponent(preyLabel)
+                    .addComponent(predatorCount)
+                    .addComponent(preyCount))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout displayPanel1Layout = new javax.swing.GroupLayout(displayPanel1);
@@ -130,7 +156,6 @@ public class Panel extends javax.swing.JPanel {
 
     private void startStopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopButtonActionPerformed
         if (!running) {
-            
             displayPanel1.start();
             startStopButton.setText("Stop");
             running = true;
@@ -168,6 +193,10 @@ public class Panel extends javax.swing.JPanel {
     private simulation.DisplayPanel displayPanel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton pauseButton;
+    private javax.swing.JLabel predatorCount;
+    private javax.swing.JLabel predatorLabel;
+    private javax.swing.JLabel preyCount;
+    private javax.swing.JLabel preyLabel;
     private javax.swing.JSlider speedSlider;
     private javax.swing.JButton startStopButton;
     private javax.swing.JButton stepButton;
