@@ -18,6 +18,8 @@ public class IntroPanel extends javax.swing.JPanel {
 
     CardSwitcher switcher = null;
     Timer t = new Timer(125, new IntroPanel.TimerTick());
+    
+    //initialize array with the phases of the gif animation
     protected final Sprite[] pacman = {new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman0.png",320,200), 
         new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman1.png",320,200), 
         new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman2.png",320,200), 
@@ -28,7 +30,6 @@ public class IntroPanel extends javax.swing.JPanel {
         new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman7.png",320,200), 
         new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman8.png",320,200)};
 
-    
     int count = 0;
     
     /**
@@ -43,6 +44,7 @@ public class IntroPanel extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        //draw the sprite at the correct phase
         pacman[count].draw(g);
         
     }
@@ -50,6 +52,7 @@ public class IntroPanel extends javax.swing.JPanel {
     private class TimerTick implements ActionListener {
 
         public void actionPerformed(ActionEvent ae) {
+            //at every timer tick, update the "phase" of the gif
             if (count < 8) {
                 count++;
             } else if (count == 8) {

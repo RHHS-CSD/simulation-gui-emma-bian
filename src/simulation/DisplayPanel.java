@@ -17,6 +17,7 @@ import javax.swing.Timer;
  */
 public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
 
+    //initialize variables
     Timer t;
     
     Simulation sim = new Simulation();
@@ -31,15 +32,21 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         initComponents();
         addMouseListener(this);
         
+        //update every 100 milliseconds
         t = new Timer(100, new TimerTick());
         
     }
 
     public void start() {
+        
+        //start the timer
         t.start();
+        
+        //reset all grids to blank
         sim.resetGrid(sim.grid);
         sim.resetGrid(sim.newGrid);
         
+        //generate initial verison of the grid
         sim.generateNew(sim.grid, sim.numPredator, sim.numPrey);
         filled = true;
         
@@ -47,28 +54,38 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     }
     
     public void reset() {
+        //stop the timer
         t.stop();
         filled = false;
         repaint();
     }
         
     public void update() {
+        //update the grid and repaint
         sim.updateGrid(sim.grid, sim.newGrid);
         repaint();
     }
     
     public void setSpeed(int speed) {
+        
+        //allow users to adjust speed with the slider
         t.setDelay(speed);
     }
     
     @Override
     public void mouseClicked(MouseEvent e) {
+        
+        //change the grid that gets clicked
         xClick = e.getX();
         yClick = e.getY();
         
         colClick = xClick/25;
         rowClick = yClick/25;
         
+        //works on a rotational system
+        //if it was blank, add a prey
+        //on the second click, add a predator
+        //on the third click, return to a blank spot
         if (sim.grid[rowClick][colClick] == -2) {
             sim.grid[rowClick][colClick] = -1;
         } else if (sim.grid[rowClick][colClick] == -1) {
@@ -84,6 +101,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        //draw grid lines
         for (int i=1;i<sim.grid.length;i++) {
             g.drawLine(i*25, 0, i*25, getHeight());
         }
@@ -92,13 +110,14 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
             g.drawLine(0, i*25, getWidth(), i*25);
         }
         
+        //if the simulation started, draw in the predator and prey in the appropriate locations
         if (filled) {
             for (int i=0;i<sim.grid.length;i++) {
                 for (int j=0;j<sim.grid[0].length;j++) {
 
                     //-2 means that there is a blank space, -1 means that there is a prey, all positive numbers indicate predator
                     if (sim.grid[i][j] == -2) {
-
+                        
                     } else if (sim.grid[i][j] == -1) {
                         g.fillOval(j*25 + 5, i*25 + 5, 15, 15);
                     } else if (sim.grid[i][j] > 0) {
@@ -113,6 +132,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     
     private class TimerTick implements ActionListener {
 
+        //on each timer tick, update the grid
         public void actionPerformed(ActionEvent ae) {
             update();
         }

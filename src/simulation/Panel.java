@@ -161,10 +161,12 @@ public class Panel extends javax.swing.JPanel {
 
     private void startStopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopButtonActionPerformed
         if (!running) {
+            //if it was not running before, start the program and set the button to "stop"
             displayPanel1.start();
             startStopButton.setText("Stop");
             running = true;
         } else if (running) {
+            //if it was running before, reset the program to its starting position
             displayPanel1.reset();
             startStopButton.setText("Start");
             running = false;
@@ -172,15 +174,18 @@ public class Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_startStopButtonActionPerformed
 
     private void stepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepButtonActionPerformed
+        //update the grid by one step
         displayPanel1.update();
     }//GEN-LAST:event_stepButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
         if (!paused) {
+            //if the program was running, stop the timer so the frame freezes
             displayPanel1.t.stop();
             pauseButton.setText("Resume");
             paused = true;
         } else if (paused) {
+            //if the program was paused, resume
             displayPanel1.t.start();
             pauseButton.setText("Pause");
             paused = false;
@@ -189,10 +194,13 @@ public class Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_pauseButtonActionPerformed
 
     private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
+        //set the speed to 250 minus 2 times the slider value (0 to 100)
         displayPanel1.setSpeed(250 - 2*speedSlider.getValue());
     }//GEN-LAST:event_speedSliderStateChanged
     
     private void updateCount() {
+        
+        //find the number of predator and prey and update the counter display
         int numPrey = findNumPrey();
         int numPredator = findNumPredator();
         
@@ -204,6 +212,7 @@ public class Panel extends javax.swing.JPanel {
         int count = 0;
         int[][] grid = displayPanel1.sim.grid;
         
+        //loop through the grid and return the number of prey
         for (int i=0;i<grid.length;i++) {
             for (int j=0;j<grid[0].length;j++) {
                 if (grid[i][j] == -1) {
@@ -218,6 +227,7 @@ public class Panel extends javax.swing.JPanel {
         int count = 0;
         int[][] grid = displayPanel1.sim.grid;
         
+        //loop through the grid and return the number of predator
         for (int i=0;i<grid.length;i++) {
             for (int j=0;j<grid[0].length;j++) {
                 if (grid[i][j] > 0) {
@@ -225,12 +235,13 @@ public class Panel extends javax.swing.JPanel {
                 }
             }
         }
-        
+
         return count;
     }
     
     private class TimerTick implements ActionListener {
 
+        //at every timer tick, update the predator and prey counter display
         public void actionPerformed(ActionEvent ae) {
             updateCount();
         }
