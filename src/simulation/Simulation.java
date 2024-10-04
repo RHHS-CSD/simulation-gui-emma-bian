@@ -13,7 +13,6 @@ import java.util.*;
  */
 public class Simulation {
 
-    Scanner kb = new Scanner(System.in);
     Random r = new Random();
     
     /**
@@ -33,47 +32,7 @@ public class Simulation {
     int numPrey = 100;
     ArrayList<Integer> a = new ArrayList<>(); //the number of steps ago that the predator last ate a prey. if <= 10, can reproduce, if > 20, will die
     //initialized to 11 to limit reproduction before eating any prey
-
-//     String userIn;
     
-//        //ask for user input
-//        displayIns();
-//        userIn = getInput();
-//
-//        //loop the simulation until the user enters "q" to quit
-//        while (!userIn.equalsIgnoreCase("q")) {
-//            
-//            //if it is the first round, "s" is entered to begin the simulation
-//            if (userIn.equalsIgnoreCase("s")) {
-//                //reset (clear) grid to begin
-//                resetGrid(grid);
-//                resetGrid(newGrid);
-//                
-//                //a new grid is generated and displayed
-//                generateNew(grid, numPredator, numPrey);
-//                displayGrid(grid);
-//                
-//                //go to next round and wait for user input to continue updating or quit
-//                userIn = kb.nextLine();
-//                continue;
-//            }
-//            
-//            //when the user enters any other intacter, the grid will update
-//            updateGrid(grid, newGrid);
-//            displayGrid(grid);
-//            
-//            userIn = getInput();
-//        }
-    
-//    private void displayIns() {
-//        System.out.println("Enter: q to quit; s to start; any other character to display updated grid");
-//    }
-    
-//    private String getInput() {
-//        
-//        //get input from user
-//        return kb.nextLine();
-//    }
     
     protected void resetGrid(int[][] grid) {
         
@@ -84,26 +43,7 @@ public class Simulation {
             }
         }
     }
-    
-//    private void displayGrid (int[][] grid) {
-//        //print the whole grid to the screen
-//        for (int i=0;i<grid.length;i++) {
-//            for (int j=0;j<grid[0].length;j++) {
-//                
-//                //-2 means that there is a blank space, -1 means that there is a prey, all positive numbers indicate predator
-//                if (grid[i][j] == -2) {
-//                    System.out.print(" ");
-//                } else if (grid[i][j] == -1) {
-//                    System.out.print("o");
-//                } else if (grid[i][j] > 0) {
-//                    System.out.print("W");
-//                }
-//                
-//            }
-//            System.out.print("\n");
-//        }
-//    }
-    
+        
     protected void displayGrid (int[][] grid) {
         
     }

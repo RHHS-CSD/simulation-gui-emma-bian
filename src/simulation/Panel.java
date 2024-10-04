@@ -24,7 +24,7 @@ public class Panel extends javax.swing.JPanel {
         initComponents();
         
         switcher = p;
-    }    
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

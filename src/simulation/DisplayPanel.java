@@ -31,25 +31,24 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         initComponents();
         addMouseListener(this);
         
-        
         t = new Timer(100, new TimerTick());
-        t.start();
         
     }
 
     public void start() {
+        t.start();
         sim.resetGrid(sim.grid);
         sim.resetGrid(sim.newGrid);
         
         sim.generateNew(sim.grid, sim.numPredator, sim.numPrey);
         filled = true;
         
-        t.start();
         repaint();
     }
     
     public void reset() {
-//        t.stop();
+        t.stop();
+        filled = false;
         repaint();
     }
         
@@ -93,7 +92,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
             g.drawLine(0, i*25, getWidth(), i*25);
         }
         
-        if (true) {
+        if (filled) {
             for (int i=0;i<sim.grid.length;i++) {
                 for (int j=0;j<sim.grid[0].length;j++) {
 
@@ -109,8 +108,6 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
                 }
             }
         }
-        
-        
         
     }
     
@@ -141,26 +138,21 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
             .addGap(0, 500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
+    
     @Override
     public void mousePressed(MouseEvent e) {
-        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
