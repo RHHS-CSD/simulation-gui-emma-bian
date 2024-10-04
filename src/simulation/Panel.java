@@ -4,6 +4,9 @@
  */
 package simulation;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import utils.CardSwitcher;
 
 /**
@@ -13,6 +16,7 @@ import utils.CardSwitcher;
 public class Panel extends javax.swing.JPanel {
 
     CardSwitcher switcher = null;
+    Timer t = new Timer(100, new Panel.TimerTick());
     
     boolean running = false;
     boolean paused = false;
@@ -24,6 +28,7 @@ public class Panel extends javax.swing.JPanel {
         initComponents();
         
         switcher = p;
+        t.start();
     }
     
     /**
@@ -187,7 +192,49 @@ public class Panel extends javax.swing.JPanel {
         displayPanel1.setSpeed(250 - 2*speedSlider.getValue());
     }//GEN-LAST:event_speedSliderStateChanged
     
+    private void updateCount() {
+        int numPrey = findNumPrey();
+        int numPredator = findNumPredator();
+        
+        preyCount.setText("" + numPrey);
+        predatorCount.setText("" + numPredator);
+    }
+    
+    private int findNumPrey() {
+        int count = 0;
+        int[][] grid = displayPanel1.sim.grid;
+        
+        for (int i=0;i<grid.length;i++) {
+            for (int j=0;j<grid[0].length;j++) {
+                if (grid[i][j] == -1) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    private int findNumPredator() {
+        int count = 0;
+        int[][] grid = displayPanel1.sim.grid;
+        
+        for (int i=0;i<grid.length;i++) {
+            for (int j=0;j<grid[0].length;j++) {
+                if (grid[i][j] > 0) {
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    private class TimerTick implements ActionListener {
 
+        public void actionPerformed(ActionEvent ae) {
+            updateCount();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private simulation.DisplayPanel displayPanel1;
