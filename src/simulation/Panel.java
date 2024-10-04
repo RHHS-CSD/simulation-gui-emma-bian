@@ -98,7 +98,7 @@ public class Panel extends javax.swing.JPanel {
                     .addComponent(stepButton)
                     .addComponent(pauseButton)
                     .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout displayPanel1Layout = new javax.swing.GroupLayout(displayPanel1);

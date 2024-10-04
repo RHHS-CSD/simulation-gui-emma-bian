@@ -19,9 +19,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="simButton" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="infoButton" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="simButton" alignment="0" pref="90" max="32767" attributes="0"/>
+                      <Component id="infoButton" alignment="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="138" max="32767" attributes="0"/>
           </Group>
@@ -32,11 +34,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="161" max="32767" attributes="0"/>
-              <Component id="infoButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="infoButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="simButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+              <EmptySpace pref="360" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,7 +54,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="infoButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="info"/>
+        <Property name="text" type="java.lang.String" value="About"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infoButtonActionPerformed"/>
@@ -60,7 +62,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="simButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="simulation"/>
+        <Property name="text" type="java.lang.String" value="Simulator"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simButtonActionPerformed"/>

@@ -4,7 +4,10 @@
  */
 package simulation;
 
-import automatastarter.GamePanel;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import utils.CardSwitcher;
 
 /**
@@ -14,6 +17,19 @@ import utils.CardSwitcher;
 public class IntroPanel extends javax.swing.JPanel {
 
     CardSwitcher switcher = null;
+    Timer t = new Timer(125, new IntroPanel.TimerTick());
+    protected final Sprite[] pacman = {new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman0.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman1.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman2.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman3.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman4.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman5.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman6.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman7.png",320,200), 
+        new Sprite(100,250,"/Users/emmabian/NetBeansProjects/simulation-gui-emma-bian/src/pacman/pacman8.png",320,200)};
+
+    
+    int count = 0;
     
     /**
      * Creates new form IntroPanel
@@ -21,8 +37,29 @@ public class IntroPanel extends javax.swing.JPanel {
     public IntroPanel(CardSwitcher p) {
         initComponents();
         switcher = p;
+        t.start();
+    }
+    
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        pacman[count].draw(g);
+        
     }
 
+    private class TimerTick implements ActionListener {
+
+        public void actionPerformed(ActionEvent ae) {
+            if (count < 8) {
+                count++;
+            } else if (count == 8) {
+                count = 0;
+            }
+            
+            repaint();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,14 +76,14 @@ public class IntroPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel1.setText("Predator and Prey Simulation");
 
-        infoButton.setText("info");
+        infoButton.setText("About");
         infoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infoButtonActionPerformed(evt);
             }
         });
 
-        simButton.setText("simulation");
+        simButton.setText("Simulator");
         simButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simButtonActionPerformed(evt);
@@ -60,9 +97,10 @@ public class IntroPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(simButton)
                     .addComponent(jLabel1)
-                    .addComponent(infoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(simButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(infoButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -70,11 +108,11 @@ public class IntroPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                .addComponent(infoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(simButton)
-                .addGap(205, 205, 205))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
