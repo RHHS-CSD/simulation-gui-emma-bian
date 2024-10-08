@@ -15,14 +15,7 @@ public class Simulation {
 
     Random r = new Random();
     
-    /**
-     * main method controls the general flow of the code
-     * determines which tasks should be performed when
-     * calls different methods to perform those tasks
-     * 
-     * @param args the command line arguments
-     */
-        
+    
     //initialize all variables
     int row = 20;
     int col = 20;
@@ -44,10 +37,6 @@ public class Simulation {
         }
     }
         
-    protected void displayGrid (int[][] grid) {
-        
-    }
-    
     protected void generateNew (int[][] grid, int numPredator, int numPrey) {
         int row, col;
         

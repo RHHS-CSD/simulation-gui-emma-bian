@@ -36,7 +36,10 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         t = new Timer(100, new TimerTick());
         
     }
-
+    
+    /**
+     * When the start button is pressed, start the simulation
+     */
     public void start() {
         
         //start the timer
@@ -53,6 +56,9 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         repaint();
     }
     
+    /**
+     * when the stop button is pressed, stop and reset the simulation grid
+     */
     public void reset() {
         //stop the timer
         t.stop();
@@ -60,19 +66,33 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         filled = false;
         repaint();
     }
-        
+    
+    /**
+     * at every timer tick, the grid is updated
+     * every time step button is pressed, the grid is also updated
+     */
     public void update() {
         //update the grid and repaint
         sim.updateGrid(sim.grid, sim.newGrid);
         repaint();
     }
     
+    /**
+     * using the slider, the user can change the speed at which the simulation runs at/updates
+     * @param speed     interval (in milliseconds) at which the timer ticks
+     */
     public void setSpeed(int speed) {
         
         //allow users to adjust speed with the slider
         t.setDelay(speed);
     }
     
+    /**
+     * every time the mouse is clicked, update the grid
+     * allows users to manually edit each spot on the grid
+     * every time they click, depending on the previous element in that grid, it will update accordingly
+     * @param e 
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         
