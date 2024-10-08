@@ -48,6 +48,7 @@ public class Panel extends javax.swing.JPanel {
         preyLabel = new javax.swing.JLabel();
         predatorCount = new javax.swing.JLabel();
         preyCount = new javax.swing.JLabel();
+        generateButton = new javax.swing.JButton();
         displayPanel1 = new simulation.DisplayPanel();
 
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
@@ -87,27 +88,36 @@ public class Panel extends javax.swing.JPanel {
 
         preyCount.setText("0");
 
+        generateButton.setText("Generate");
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(startStopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(startStopButton)
-                        .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(pauseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stepButton)
                         .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(predatorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(predatorCount)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)
                         .addComponent(preyLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(preyCount)
@@ -127,8 +137,9 @@ public class Panel extends javax.swing.JPanel {
                     .addComponent(predatorLabel)
                     .addComponent(preyLabel)
                     .addComponent(predatorCount)
-                    .addComponent(preyCount))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(preyCount)
+                    .addComponent(generateButton))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout displayPanel1Layout = new javax.swing.GroupLayout(displayPanel1);
@@ -152,9 +163,10 @@ public class Panel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(displayPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,6 +183,7 @@ public class Panel extends javax.swing.JPanel {
         } else if (running) {
             //if it was running before, reset the program to its starting position
             displayPanel1.reset();
+            displayPanel1.generate = -1;
             startStopButton.setText("Start");
             
             //stops timer and sets predator and prey counter to zero
@@ -212,6 +225,18 @@ public class Panel extends javax.swing.JPanel {
         //set the speed to 250 minus 2 times the slider value (0 to 100)
         displayPanel1.setSpeed(250 - 2*speedSlider.getValue());
     }//GEN-LAST:event_speedSliderStateChanged
+
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+        //update which screen will be generated on each press
+        if (displayPanel1.generate < 3) {
+            displayPanel1.generate++;
+        } else {
+            displayPanel1.generate = 0;
+        }
+        
+        //generate the screen
+        displayPanel1.generate();
+    }//GEN-LAST:event_generateButtonActionPerformed
     
     private void resetCount() {
         //set predator and prey counter to zero
@@ -270,6 +295,7 @@ public class Panel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private simulation.DisplayPanel displayPanel1;
+    private javax.swing.JButton generateButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton pauseButton;
     private javax.swing.JLabel predatorCount;

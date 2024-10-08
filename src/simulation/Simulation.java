@@ -65,8 +65,68 @@ public class Simulation {
         }
     }
     
-    protected void updateGrid (int[][] grid, int[][] newGrid) {
+    protected void generateA (int[][] grid, int numPredator, int numPrey) {
+        //generate the first grid
+        //prey wll be on the left side in rows, and predators will be on the right side correspondingly
+        for (int i=0;i<grid.length;i++) {
+            for (int j=0;j<grid[0].length/4;j+=2) {
+                grid[i][j] = -1;
+            }
+        }
         
+        for (int i=0;i<grid.length;i++){
+            grid[i][grid[0].length-1] = 1;
+        }
+    }
+    
+    protected void generateB (int[][] grid, int numPredator, int numPrey) {
+        //generate the second grid
+        //prey will be in the top left corner, and predators will remain on the the right side
+        for (int i=0;i<grid.length/2;i++) {
+            for (int j=0;j<grid[0].length/2;j+=2) {
+                grid[i][j] = -1;
+            }
+        }
+        
+        for (int i=0;i<grid.length;i++){
+            grid[i][grid[0].length-1] = 1;
+        }
+    }
+    
+    protected void generateC (int[][] grid, int numPredator, int numPrey) {
+        //generate the third grid
+        //prey will be in the top left corner, and predators will be in the bottom right corner
+        for (int i=0;i<grid.length/2;i++) {
+            for (int j=0;j<grid[0].length/2;j+=2) {
+                grid[i][j] = -1;
+            }
+        }
+        
+        for (int i=grid.length-1;i>grid.length*3/5;i--) {
+            for (int j=grid[0].length-1;j>grid[0].length*3/5;j-=2) {
+                grid[i][j] = 1;
+            }
+        }
+    }
+    
+    protected void generateD (int[][] grid, int numPredator, int numPrey) {
+        //generate the fourth grid
+        //prey will be on the left side, and predators will be in the bottom right corner
+        for (int i=0;i<grid.length;i++) {
+            for (int j=0;j<grid[0].length/4;j+=2) {
+                grid[i][j] = -1;
+            }
+        }
+        
+        for (int i=grid.length-1;i>grid.length*3/5;i--) {
+            for (int j=grid[0].length-1;j>grid[0].length*3/5;j-=2) {
+                grid[i][j] = 1;
+            }
+        }
+    }
+    
+    
+    protected void updateGrid (int[][] grid, int[][] newGrid) {
         //copy the grid onto the new grid
         //updating feature looks at the orginal grid to check if each spot is a predator, prey, or blank
         //then it looks around to see if there are free spots on the new grid, and updates the new grid

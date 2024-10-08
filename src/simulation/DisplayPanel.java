@@ -22,6 +22,7 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     
     Simulation sim = new Simulation();
     boolean filled = false;
+    int generate = -1;
     int xClick, yClick;
     int rowClick, colClick;
     
@@ -45,13 +46,15 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
         //start the timer
         t.start();
         
-        //reset all grids to blank
-        sim.resetGrid(sim.grid);
-        sim.resetGrid(sim.newGrid);
-        
-        //generate initial verison of the grid
-        sim.generateNew(sim.grid, sim.numPredator, sim.numPrey);
-        filled = true;
+        if (generate == -1) {
+            //reset all grids to blank
+            sim.resetGrid(sim.grid);
+            sim.resetGrid(sim.newGrid);
+
+            //generate initial verison of the grid
+            sim.generateNew(sim.grid, sim.numPredator, sim.numPrey);
+            filled = true;
+        }
         
         repaint();
     }
@@ -74,6 +77,33 @@ public class DisplayPanel extends javax.swing.JPanel implements MouseListener {
     public void update() {
         //update the grid and repaint
         sim.updateGrid(sim.grid, sim.newGrid);
+        repaint();
+    }
+    
+    /**
+     * generate common patterns through a rotational system
+     * pressing the buttons more time would generate different patters
+     * the number of predator and prey are not necessarily the same as a completely randomized grid
+     */
+    public void generate() {
+        
+        //reset all grid
+        sim.resetGrid(sim.grid);
+        sim.resetGrid(sim.newGrid);
+        
+        //generate the grid according to the previous grid to create a rotational system
+        if (generate == 0) {
+            sim.generateA(sim.grid, sim.numPredator, sim.numPrey);
+        } else if (generate == 1) {
+            sim.generateB(sim.grid, sim.numPredator, sim.numPrey);
+        } else if (generate == 2) {
+            sim.generateC(sim.grid, sim.numPredator, sim.numPrey);
+        } else if (generate == 3) {
+            sim.generateD(sim.grid, sim.numPredator, sim.numPrey);
+        }
+        
+        //repaint it to the screen
+        filled = true;
         repaint();
     }
     
